@@ -1,38 +1,25 @@
-- name: SonarQube Scan for C and C++
-  uses: SonarSource/sonarqube-github-c-cpp@v2.0.0
-            
 on:
-  # Trigger analysis when pushing in master or pull requests, and when creating
-  # a pull request.
+  # Trigger analysis when pushing to your main branches, and when creating a pull request.
   push:
     branches:
       - main
+      - master
+      - develop
+      - 'releases/**'
   pull_request:
       types: [opened, synchronize, reopened]
+
 name: Main Workflow
 jobs:
   sonarqube:
     runs-on: ubuntu-latest
-    env:
-      BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory # Directory where build-wrapper output will be placed
     steps:
     - uses: actions/checkout@v4
       with:
-        # Disabling shallow clone is recommended for improving relevancy of reporting
+        # Disabling shallow clones is recommended for improving the relevancy of reporting
         fetch-depth: 0
-    - name: Install sonar-scanner and build-wrapper
-      uses: sonarsource/sonarqube-github-c-cpp@v2
+    - name: SonarQube Scan
+      uses: sonarsource/sonarqube-scan-action@<action version> # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/official-sonarqube-scan
       env:
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        SONAR_ROOT_CERT: ${{ secrets.SONAR_ROOT_CERT }}
-    - name: Run build-wrapper
-      run: |
-      # here goes your compilation wrapped with build-wrapper; See https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/languages/c-family/#using-build-wrapper for more information
-      # build-preparation steps
-      # build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} build-command
-    - name: Run sonar-scanner
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      run: sonar-scanner --define sonar.cfamily.compile-commands="${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json" #Consult https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/ for more information and options
+        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
