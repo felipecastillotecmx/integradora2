@@ -1,3 +1,6 @@
+- name: SonarQube Scan for C and C++
+  uses: SonarSource/sonarqube-github-c-cpp@v2.0.0
+            
 on:
   # Trigger analysis when pushing in master or pull requests, and when creating
   # a pull request.
