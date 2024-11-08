@@ -15,6 +15,7 @@ long long prhf(string S){
     return valorHash;
 }
 int main(){
+    
     string S;
     getline(cin, S);  
     cout << prhf(S) << endl;
