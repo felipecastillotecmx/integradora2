@@ -1,0 +1,3 @@
+/Users/felipecastillorendon/git/tecmx/c++/actividadIntegradora2/cmake-build-debug/CMakeFiles/actividadIntegradora2.dir
+/Users/felipecastillorendon/git/tecmx/c++/actividadIntegradora2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/felipecastillorendon/git/tecmx/c++/actividadIntegradora2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
