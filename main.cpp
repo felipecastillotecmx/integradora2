@@ -1,5 +1,6 @@
 /*
 Instrucciones:
+
 En equipos de máximo 3 personas, escribe en C++ un programa que ayude a una empresa que quiere
 incursionar en los servicios de internet respondiendo a la situación problema 2.
 
